@@ -1,0 +1,185 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(rattle)  # graphical interface for data science in R
+library(magrittr)  # For %>% and %<>% operators.
+library(rpart.plot) # decision tree model and plot
+library(dplyr)
+library(kableExtra)
+library(gtsummary)
+```
+
+##Loading the data
+```{r}
+library(readxl)
+staff <- read_excel("D:/BN/New folder/HR_ANALYTICS/staff.xlsx")
+View(staff)
+```
+
+```{r}
+staff%>% select(satisfaction_score,perf_evaluation,average_montly_hours,department,salary,left)%>%
+  tbl_summary(by = left,statistic = list(all_continuous()~"{mean} ({sd})",
+  all_categorical()~"{n}/{N} ({p}%"),digits = all_continuous()~2,label = left~"Employee Turnover",
+  missing_text = "(Missing")%>% modify_header(label = "**Variable**")%>%
+  bold_labels()
+```
+
+
+## Converting categorical into numerical variables
+```{r}
+HRData = staff%>%
+  mutate(depart=case_when(department=="accounting"~1,department=="hr"~2,
+                          department=="IT"~3,department=="management"~4,
+                          department=="marketing"~5,department=="product_mng"~5,
+                          department=="RandD"~6,department=="sales"~6,
+                          department=="support"~7,TRUE~8),
+         Salary_Range = case_when(salary=='low'~1,salary=='medium'~2,TRUE~3))
+
+```
+
+```{r}
+head(HRData,3)%>% kbl()%>% kable_styling()
+```
+
+```{r}
+
+```
+
+
+## Selecting Variables to include in the modelling
+```{r}
+data = HRData%>% select(satisfaction_score,perf_evaluation,projects,average_montly_hours,
+                        time_spend_company,accident,promotion_last_5years,depart,
+                        Salary_Range,left)
+```
+
+## Data partitioning
+```{r}
+library(caret)
+#make this example reproducible
+set.seed(1)
+
+#Use 70% of dataset as training set and remaining 30% as testing set
+train_indices<- sample(c(TRUE, FALSE), nrow(data), replace=TRUE, prob=c(0.70,0.30))
+df_train  <- data[train_indices, ]
+df_test   <- data[!train_indices, ]
+
+```
+
+## Decision tree modelling
+```{r}
+library(rpart)
+library(rpart.plot)
+ # fitting decision tree classification model
+DTModel <- rpart(left~., data = df_train,method = "class")
+                    
+rpart.plot(DTModel)
+```
+
+
+## Evaluating Model's Perfomance
+```{r}
+DTModel.pred <- predict(DTModel, df_test, type = "class")
+
+Actual = as.factor(df_test$left)
+(DTModel.conf <- confusionMatrix(data =DTModel.pred, 
+                                  reference = Actual))
+```
+
+## Variables importance
+```{r}
+library(vip)
+vi(DTModel)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
