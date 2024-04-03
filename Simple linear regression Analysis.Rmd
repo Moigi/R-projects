@@ -1,0 +1,81 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(haven)
+GSS7218_R3 <- read_sav("D:/Analytics/Statistical Analysis Practice/Rtasks/GSS7218_R3.sav")
+#View(GSS7218_R3)
+
+```
+# Dependent and Indepedent variables
+
+```{r}
+library(tidyverse)
+data = GSS7218_R3|>select(AGE,INCOME,PRESTIGE,WTSSALL)
+df = na.omit(data)
+glimpse(df)
+
+```
+
+The dependent variable of interest is Income while the predictor variable is Age. I believe person's age is related to his or her income level. 
+
+$H_0:\beta_{0}=0$
+$H_a:\beta_{0}\neq0$
+
+
+```{r}
+cor(df)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
