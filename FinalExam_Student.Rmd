@@ -1,0 +1,251 @@
+---
+title: "ANA600 Final Exam"
+author: '{Student Name}'
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+  html: default
+  pdf_document: default
+  word_document: default
+---
+## INSTRUCTIONS 
+
+Perform basic exploratory data analysis (EDA) for the final exam. EDA consists of the procedures and concepts we have practiced throughout the course. You will be exploring your dataset, reviewing the variables, modeling an variable of interest, and interpreting results. Each section requires a complete paragraph explaining and interpreting the results within the R-Markdown above the code block required to analyze that section. All writing and code should be written as if presenting a report to your supervisor.
+
+Provided data was selected to gather information about consumer attitudes and decisions to save, borrow, or make purchases. The researchers wanted to forecast changes in consumer behavior in the United States and better understand consumer confidence about personal finances, employment, price changes, and the perceived state of national business. Your job is to develop a model of income by sex to determine if there is a statistically significant difference between the two.
+
+Below is a list of the variables included in the dataset:
+
+* household: including yourself, how many members of your household are 18 years or older?
+* kids: How many members of your household are 17 years or younger?
+* vehicles: How many vehicles do you use, including those leased, owned, or provided by your employer for personal use?
+* priceExpected: By what percent do you expect prices to go up/down on average during the next 12 months?
+* incomeExpected: By what percent per year do you expect your (family) income to increase/decrease during the next 12 months?
+* businessExpected: Considering business conditions in the country as a whole, do you think that during the next 12 months, we'll have good or bad times financially?
+* financialStability: Would you say that you (and your family) are better off or worse off financially than you were a year ago?
+* investments: What type of investments do you plan to add or shift money into or open during the next three months: mutual funds, savings accounts, stocks, bonds, retirement accounts?
+* income: What is your household gross income (in thousands)?
+* age: What is your age?
+* employmentSector: What is your employment sector?
+* region: What is your state of residence? (recoded into regions)
+* hoursPerWeek: Approximately how many hours a week are you employed?
+  
+***
+***
+
+## PREPARATION (10 Points)
+*Import the required file to a new dataframe and load necessary libraries*
+
+```{r include=FALSE}
+library(tidyverse) # For chaining data and tidying
+library(pivottabler) # for crosstabulation
+library(kableExtra)
+library(ggplot2)
+library(readr)
+student_mat_1 <- read_csv("student-mat-1.csv",show_col_types = FALSE)
+ACS <- read_csv("ACS.csv",show_col_types = FALSE)
+```
+
+## INTRODUCTION AND RESEARCH QUESTION (5 Points)
+1. Introduce your purpose and scope, creating a story for the data generation process that might be responsible for the variation in income output variable.
+
+The purpose of this study is to provide an analysis of the relationship between gender (sex) and household income (Income). In the majority of households,the male is the primary wage earner, and there are slightly fewer households in which the female is the primary earner.
+
+2. Describe the research question:
+
+Is to examine the relationship between household income and people's sex.
+
+
+## QUESTION #1 (10 Points)
+1. Enter code to produce the structure of your dataframe
+```{r}
+glimpse(ACS)
+```
+
+2. Recode the Sex variable to 0=Female, 1=Male
+```{r}
+ACS <- ACS|> mutate(Sex=recode(Sex, '0'='Female', '1'='Male'))
+```
+
+3. Produce a crosstab table of observations for the race and sex variables 
+```{r}
+pt <- PivotTable$new()
+pt$addData(ACS) 
+pt$addColumnDataGroups("Race")
+pt$addRowDataGroups("Sex")
+pt$defineCalculation(calculationName="Race", summariseExpression="n()")
+pt$renderPivot()
+```
+
+4. View the top five records in the dataframe
+```{r}
+head(ACS,5)|>kable()|>kable_styling()
+```
+
+5. Write one paragraph describing the structure of the data frame and interpreting the produced table
+
+The dataset contains 1000 rows(observations) and 9 variables. Age, Income and HoursWK are numeric variables while race variable is categorical. The rest of the variables (sex,married,USCitizen,Language and HealthInsurance) are dummy.
+
+
+## QUESTION #2 (10 Points)
+1. Recode the income variable to value x 1,000
+```{r}
+ACS <- ACS|> mutate(Income =  Income*1000)
+```
+
+2. Calculate the minimum, maximum, mean, median, IQR, and range for income
+```{r}
+ACS|>summarise(
+                Minimum =  min(Income),
+                Maximum =  max(Income),
+                Mean =  mean(Income),
+                Median =  median(Income),
+                IQR =  IQR(Income),
+                Range =  Maximum - Minimum)|>
+  kable()|>kable_styling()
+#Income_Stat_summary
+```
+
+3. Calculate the mean of income each for males and for females
+```{r}
+ACS|>group_by(Sex)|>summarise(Mean =  mean(Income))|>
+  kable()|>kable_styling()
+```
+
+3. Write one paragraph explaining and interpreting the descriptive statistics
+
+From the descriptive statistics results the following was found:
+- The minimum and maximum household gross income are 0 and 563000 respectively. 
+- The median household income ($M = 13000$)
+- The interquartile range of household income is 31841.09	
+- Male have higher household income ($M = 28573.61$) than their female counterparts ($M = 17794.32$)
+
+## QUESTION 3 (10 Points)
+1. Create a new variable SexL such that Sex = 0 is "Female", Sex = 1 is "Male", and else is "Undefined" 
+```{r}
+ACS <- read_csv("ACS.csv",show_col_types = FALSE)
+ACS <- ACS|> mutate(SexL=case_when(Sex==0~'Female', 
+                                   Sex==1~'Male',
+                                   TRUE~'Underfined'))
+```
+
+2. Create an appropriate visualization for income and the new SexL variable
+```{r}
+ boxplot(Income ~ SexL, data = ACS,
+        col = c("#FFA726", "#F57C00"),
+        horizontal = TRUE,
+        main = "Household income by sex",
+        xlab = "Household Income (in thousands)",
+        ylab = "SexL") 
+
+```
+
+3. Write one paragraph explaining and interpreting the visualization
+
+The boxplot above shows that household income for both male and female contains  several outliers. 
+
+## QUESTION 4 (10 Points)
+1. Create a histogram of income by sex with facet grid
+```{r}
+ggplot(ACS, aes(x=Income,fill = SexL)) +
+    geom_histogram( bins = 60,color="#e9ecef", alpha=0.6, position = 'identity') +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) +
+    theme_bw() + facet_wrap(~SexL, scale="free_y",nrow =2) +
+    labs(fill="")
+```
+
+3. Write one paragraph explaining and interpreting the visualization
+
+The graph above shows household income distribution by SexL. It can be observed that the income for both male and female is positively skewed.
+
+## QUESTION 5 (10 Points)
+1. Create a model of income for females
+```{r}
+ACS <- read_csv("ACS.csv",show_col_types = FALSE)
+modelfemale = lm(Income~Sex==0,data = ACS)
+summary(modelfemale)
+```
+
+3. Write one paragraph explaining and interpreting the model
+
+The model above illustrates that the coefficient of female is statistically significant ($t = -4.382,p<.0001$). This implies that female can statistically predict household income.
+
+## QUESTION 6 (20 Points)
+1. Create a model of income by sex
+```{r}
+ACS <- read_csv("ACS.csv",show_col_types = FALSE)
+modelsex = lm(Income~Sex,data = ACS)
+summary(modelsex)
+```
+
+3. Write one paragraph explaining and interpreting the model
+
+The model above illustrates that the coefficient of sex is statistically significant ($t = 4.382,p<.0001$). This shows that sex variable can statistically predict household income.
+
+
+## QUESTION 7 (20 Points)
+1. Calculate the predicted value and residual value for each observation using the income by sex model
+```{r}
+pred <- modelsex |> predict(ACS, type = "response")
+
+resid = modelsex$residuals
+Sex = ACS$Sex
+Income = ACS$Income
+head(cbind(Sex,Income,pred,resid))
+```
+
+2. Calculate the sum of squared deviations and sum of absolute deviations
+```{r}
+# Calculate the mean of the dataset
+mean_income <- mean(ACS$Income)
+
+deviation = sum(abs(ACS$Income - mean_income))
+
+# Calculate the sum of squared deviations
+ssd <- sum((ACS$Income - mean_income)^2)
+ 
+# Print the result
+cat("Sum of Squared Deviations (SSD) =", ssd)
+
+cat("\nSum of Deviations (D)           =", deviation)
+```
+
+3. Write one paragraph explaining and interpreting the results
+
+The sum of squares gives us the deviation of data points away from the mean value.  From the calculations, the sum of squared deviations and sum of deviations are significantly high this indicates that there's higher variability.
+
+## QUESTION 8 (20 Points)
+1. Run an analysis of variance on the model of income by sex
+```{r}
+anova(modelsex)
+```
+
+2. Write one paragraph explaining and interpreting the results
+
+$H_0:\beta_{0}=0$
+$H_a:\beta_{0}\neq0$
+
+Analysis of Variance was performed to compare the effect of sex on household income, a little female and male. There was a significant effect of female at the p<.05 level [F(1, 998) = 19.2, p<.0001]
+
+## QUESTION 9 (10 Points)
+1. Calculate the proportional reduction in error
+```{r}
+library(supernova)
+supernova(modelsex)
+```
+
+2. Write one paragraph explaining and interpreting the improvement of the linear model by adding sex
+Proportional reduction in error (r2) is the proportion of accuracy (in terms of explaining the variability). From the table above, we can see the Proportional reduction in error ($PRE = 0.0189$). This indicates that by adding sex, the model improves by about 1.89%.
+
+## QUESTION 10 (20 Points)
+Write one paragraph interpreting and concluding the results of your analysis.
+
+The main purpose of this study was to determine the association between gender (sex) and household income (Income). The descriptive statistics shown that males in the households have a higher income than females. The household income median income and range is about 13000 and 563000 respectively. The linear regression model performed shown that sex is statistically significant in explaining household income. 
+
+
+
+
+
+
+**END OF FINAL EXAM**
