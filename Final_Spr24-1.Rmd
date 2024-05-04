@@ -1,0 +1,262 @@
+---
+title: "ECON6635 Final Exam - Spring 2024"
+author: "Student: TYPE Your Name  and E-mail Here!"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+openintro::lab_report: default
+subtitle: Dr. Esin Cakan
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+The Final Exam is out of 35 points. Please see all 3 questions given below.
+
+Question #1 and #2 are 15 points. Question #3 is 5 points.
+Each question will be graded as given in the rubrics on syllabus. You should knit this file with your name written in "author" section at top; and knit as html file. Submit the html file as your Exam. Do not submit pdf or word file. No points will be assigned if it is not in html format or it is submitted late. It should be your own work. 
+
+Please answer each question in the given space. The codes in one R-chunk for each question. Make sure it is running. Make sure your data is also readable if you import Excel data (you can post it on Google Doc and give a link, for example). I could be able to run your codes on my machine, if needed. In each question, Part a is for your codes; and Part b is for summary of what you found out in your codes. It should show your ability to comment on result of codes and make your audience to understand about your findings technically and non-technically.
+
+
+```{r}
+# Do NOT use forecast package. You should use fpp3 package only.
+# install below packages first:
+
+library(fpp3)
+library(tidyverse)
+library(DMwR2)
+library(caTools)
+library(plotly)
+library(TSstudio) # install first.
+library(dygraphs)
+
+library(pacman)
+        pacman::p_load(forecast)
+        p_load(tidyverse, lubridate, rio, pdfetch, tidyverse, readxl)
+Sys.time()
+
+```
+
+## 1.	
+
+- Select a "monthly" time series from Quandl or FRED by yourself. it should be specific to you only. (If it is not monthly, make it monthly series, by using collapse() command). 
+```{r}
+# Load the Quandl package
+library(Quandl)
+
+# Import GDP data from FRED
+gdp <- Quandl(code = "FRED/GDP",collapse = "monthly",  
+                    start_date = "2013-01-01", 
+                    end_date = "2023-12-31")
+gdp <- gdp |>
+  mutate(Month = yearmonth(Date)) |>
+  as_tsibble(index = Month) |>
+  select(Month,Value)
+# Look at the structure of the object returned by Quandl
+#str(gdp)
+gdp = as.ts(gdp)
+```
+
+- Transform the data into monthly tsibble format. Make sure the series is tsibble to be able to use many fpp3 package commands to forecast with graphs.
+
+```{r}
+#autoplot(gdp)+ theme_bw() + labs(y = " Value",x = " Time",title = "GDP")+
+   # theme(plot.title = element_text(hjust = 0.5))
+ts_plot(gdp)
+```
+
+- After	plotting graph of the series, comment on the graph. Explain what you determine visually.
+
+- Then divide the series into two parts as training and test data set (you can use subset() or window()command for dividing data into training and test). You decide how many observations you need to leave as test data set (e.g. 80% of test, 20% training data set). 
+
+```{r}
+#make this example reproducible
+set.seed(1)
+#use 80% of dataset as training set and 20% as test set
+sample <- sample.split(gdp, SplitRatio = 0.8)
+train_series  <- subset(gdp, sample == TRUE)
+test_series   <- subset(gdp, sample == FALSE)
+```
+
+
+- Identify an appropriate ARIMA model for the training data. You should do residual diagnostics of your ARIMA model to make sure the residuals are white noise. If needed, take logarithms of the series, or make any needed transformation. It is your call! 
+
+# Fitting the time series model
+```{r}
+fit = auto.arima(train_series)
+summary(fit)
+```
+
+# Checking for residual
+```{r}
+checkresiduals(fit)
+```
+The arima model above was a satisfactory model as the residuals are white noise.
+
+
+- Then explain which ARIMA model you would chose. Use your chosen ARIMA model to forecast for whole data set. Calculate the accuracy of the forecasted model. what you get as RMSE? Explain what RMSE means.
+
+ARIMA model(0,1,0) model is chosen.
+```{r}
+f.gdp010 = forecast(fit1,length(gdp))
+logtest_series = log(test_series)
+accuracy(f.gdp010,logtest_series)
+```
+The accuracy (RMSE) of the forecasted model is 0.02928748. The RMSE value is close to zero indicating that the ARIMA (0,1,0) is a better model.
+
+- Plot the ARIMA model with forecasted value and test data value together. What do you see visually? (e.g. you can use autoplot() and autolayer() commands) 
+```{r}
+autoplot(f.gdp010)
+```
+
+
+- Check the accuracy of the test data series.
+
+The accuracy (RMSE) of the test data series is 7.85660263
+
+- Identify an ETS for the training data set. Then use the model to forecast for the whole data set. Calculate the accuracy of the model for the test data set. Compare the accuracy values from ETS model with ARIMA model. Comment on which model is better to use for ahead forecasting. Which one would you choose? Explain briefly why and how did you come on that conclusion. 
+```{r}
+# ETS model
+fit2 <- ets(logtest_series, opt.crit = "mse")
+fc2 <- forecast(fit2, h = length(gdp))
+accuracy(fc2, logtest_series)
+```
+ETS model is better because the (RMSE = 0.02928748) of the ARIMA(0,1,0) model is greater than (RMSE = 0.004911235) of the ETS. The lower the RMSE the better the model is.
+
+
+- By using the model you chose, forecast for next 1 year ahead. What would be the first month forecasted value ahead? 
+```{r}
+fc2 <- forecast(fit2, h = 1)
+summary(fc2)
+```
+
+
+Plot the 1 year ahead forecasted values with the original data set in a graph, give with a confidence interval for forecasted values.
+
+```{r}
+md1 <- auto.arima(train_series, stepwise = FALSE, approximation = FALSE,D = 1)
+fc <- forecast(md1, h = length(test_series))
+#accuracy(fc, logtest_series)
+
+test_forecast(forecast.obj = fc, actual = gdp, test = test_series) %>% 
+  layout(legend = list(x = 0.1, y = 0.95))
+```
+
+
+### 1b. 
+Write one paragraph (max 250 words) below to explain all the results from your commands. Make sure you explain the steps you did and the results you obtained with your own words.
+
+Answer: 
+
+
+## 2.	
+
+- Obtain Consumer Price Index (CPI) from either Quandl or FRED. 
+```{r}
+CPI <- Quandl("FRED/CPIAUCSL",collapse = "monthly",  
+                    start_date = "2021-01-01", 
+                    end_date = "2021-12-31")
+CPI = CPI|>rename(`Consumer Price Index (CPI)` = Value)
+head(CPI)
+```
+
+
+- By using pdfetch or quantmod packages, obtain "monthly" S&P 500 Price Index. (or transform the series to monthly by collapse() command)
+```{r}
+library(quantmod)
+getSymbols(Symbols = "^GSPC",from = "2021-01-01", 
+                     to = "2021-12-31",freq = "monthly")
+SP500 = to.monthly(GSPC,OHLC=FALSE, indexAt="lastof", 3)
+head(SP500)
+```
+
+
+- Combine these two series together monthly, start and end dates should be the same. (You can use Excel file if it is easier, then import to R)
+```{r}
+#df = cbind(CPI,SP500)
+df <- merge(CPI,SP500)
+series = df|>rename(`S&P500 Price Index` = GSPC.Adjusted)|>
+  select(Date,`Consumer Price Index (CPI)`,`S&P500 Price Index`)
+head(series)
+```
+
+
+- Calculate the real value of S &P 500 Price Index.
+
+- Compare the nominal value and real value of the index. Plot them together to see visually. Is there any significant difference you can see visually? Explain why.
+```{r}
+ts_plot(series)
+```
+
+
+- Forecast the real value of S&P 500 Price Index for the next 6 months.
+```{r}
+sp500 = series$`S&P500 Price Index`
+md2 <- auto.arima(sp500)
+fcsp500 <- forecast(md2, h = 6)
+autoplot(fcsp500)
+
+```
+
+
+- Would you prefer to invest in the index based on the forecasted value? 
+
+
+- Calculate the return of nominal S&P 500 Price Index. Plot the return and command on what you see visually. Does it look stationary? Forecast for the next 6 month ahead by any model you would choose? Explain the data and forecasted values.
+
+```{r}
+library(tseries) 
+library(zoo)
+# 4. Augmented Dickey-Fuller (ADF) Test 
+adf_test <- adf.test(sp500) 
+print("ADF Test:") 
+print(adf_test) 
+
+```
+
+
+
+### 2b.
+Write one paragraph (max 250 words) below to explain all the commands and their results. Make sure you explain the steps you did and the results you obtained with your own words.
+
+Answer: 
+
+
+## 3.	
+
+- Use the monthly S&P 500 Price Index you obtained in #2. 
+
+- Make sure you create and use a tsibble data set. 
+```{r}
+sp500 = tsibble(series, key = `S&P500 Price Index`, index = Date)
+
+
+```
+
+
+- Make a visual decision by using necessary plots to see whether or not December is the highest index value on average among other months. What do you see? Comment. 
+```{r}
+plot(sp500)
+```
+
+- Run a regression model that considers seasonality in the data (you can add trend if you think it is necessary) to explain the variability in the index. 
+
+- Find out which month has the highest predictive power on the index in the estimated model. Is the coefficient statistically significant at 5%? 
+
+- Is your model as a whole significant at 5%. Comment on the estimated model.
+
+- Which month would you invest on S&P 500 Price Index ETF's, if you would? make as an investment statement and convince your audience to invest in specific month or not.
+
+```{r}
+
+# 3a.Answer: Type all your codes here, only.
+
+```
+
+### 3b. 
+Write a paragraph (max 250 words) below to explain all the commands and their results. Make sure you explain the steps you did and the results you obtained with your own words.
+
+Answer:
