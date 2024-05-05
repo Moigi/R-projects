@@ -1,0 +1,182 @@
+---
+title: "Wk4_Assignment4-1"
+format:
+  docx
+editor: visual
+---
+
+1\.
+Introduction and research questions
+
+*a. Introduction,purpose and scope.*
+
+Earlier research shown that romantic relationships have a significant effect on the academic performance of male students, resulting in a lower GPA (Honghao, & Tianyu, 2021).
+This study attempt to explore the relationship between romantic relationship and absences.
+The major variables used to answer the research question includes romantic and student's absence in school.
+
+b.  Describe the research question.
+
+Is there a relationship between student in a romantic relationship and being absence in school?
+If there's, is it statistically significant?
+
+b.  Give a rationale for studying the relationship between romantic relationship and absences. Why do you think romantic relationship would explain variation in absences?
+
+Students in adolescents stage are likely to experience distraction, stress, and low academic performance due to infatuation and romantic relationships.
+Therefore, being in a romantic relationship is associated with increased class absences.
+
+ii. Include the word equation.
+
+$$
+Absence = {\beta}_0+{\beta}_1Romatic
+$$
+
+**Packages needed**
+
+```{r,echo=FALSE}
+library(webshot) 
+library(mosaic) 
+library(gtsummary) 
+library(gt) 
+library(ggplot2)
+library(tidyverse) 
+```
+
+2.  Data Description
+
+***loading data***
+
+```{r}
+library(readr)
+student_mat_1 <- read_csv("student-mat-1.csv",show_col_types = FALSE)
+#View(student_mat_1)
+
+```
+
+a.  What are the frequencies of the categorical demographic variables?
+
+```{r}
+student_mat_1 |>
+  select(romantic,school, sex,famsize,Pstatus)|>
+  tbl_summary(by = romantic,
+              type = all_continuous() ~ "continuous2",
+              statistic = all_continuous() ~ c(
+              "{N_nonmiss}",
+              "{median} ({p25}, {p75})",
+              "{min}, {max}"))|>
+  add_overall() |>
+  modify_header(label ~ " ") |>
+  bold_labels() |>
+  as_gt() |>
+  # modify with gt functions
+  gt::tab_header("Table 1: EDA of the categorical demographic variables")|> 
+  gt::tab_spanner(
+    label = "Romantic variable",  
+    columns = starts_with(c("stat_1","stat_2")))|> 
+  gt::tab_options(
+    table.font.size = "small",
+    data_row.padding = gt::px(2))
+  
+
+```
+
+a.  What are the five-number summaries of your quantitative demographic variables?
+
+```{r}
+student_mat_1|>summarise(
+                Minimum =  min(age),
+                Q1      =  quantile(age,0.25),
+                `Median (Q2)` =  median(age),
+                Q3      =  quantile(age,0.75),
+                Maximum =  max(age))|> gt()
+```
+
+a.  Provide descriptive statistics of your outcome and explanatory variable.
+
+```{r}
+favstats(absences~romantic, data = student_mat_1)|>gt()
+student_mat_1|>group_by(romantic)|>summarise(
+                Minimum =  min(absences),
+                Q1      =  quantile(absences,0.25),
+                Mean    =  mean(absences),
+                `Median (Q2)` =  median(absences),
+                `Standard Deviation (SD)` = sd(absences),
+                Q3      =  quantile(absences,0.75),
+                Maximum =  max(absences))|> gt()
+```
+
+a.  Create a histogram of the absences variable. Reference the figure in your report. What do you see? Describe the shape, center, skewness, and weirdness.
+
+```{r}
+student_mat_1 |>
+  ggplot( aes(x=absences)) +
+    geom_histogram( binwidth=3, fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    ggtitle("Histogram for absences") +
+    theme_bw() +
+    theme(
+      plot.title = element_text(size=15,hjust = 0.5)
+    )
+```
+
+b\.
+Provide a visualization of the research question.
+Reference the figure in your report.
+What do you see?
+
+```{r}
+student_mat_1 |>
+  ggplot( aes(x=absences)) +
+  geom_histogram(aes(color = romantic, fill = romantic), 
+                position = "identity", bins = 30, alpha=0.5) +
+  theme_bw() + theme(legend.position="top")+
+  ggtitle("Histogram illustrating absences distribution")+
+  theme(plot.title = element_text(size=15,hjust = 0.5))
+    
+```
+
+3.  Research Question: Absences explained by Romantic
+4.  Empty model: Fit the empty model for your outcome.
+
+```{r}
+Emptymodel = lm(absences~NULL,data = student_mat_1)
+```
+
+3.  Now that you have estimates of your parameter(s), put them into a model statement (see Ch. 7.2).
+
+```{r}
+summary(Emptymodel)
+```
+
+3.  Based on the model output and model statement, interpret the estimated parameter(s). What do the numbers mean?
+
+<!-- -->
+
+b.  Explanatory Model: Add your explanatory variable to the model.
+c.  How is 𝑋" coded?
+
+```{r}
+student_mat_1 = student_mat_1|>mutate(romantic = ifelse(romantic=='yes',1,0))
+model = lm(absences~romantic,data = student_mat_1)
+
+```
+
+ii. Now that you have estimates of your parameter(s), put them into a model statement (see Ch. 7.2).
+
+```{r}
+summary(model)
+```
+
+ii. Based on the model output and model statement, interpret the estimated parameter(s). What do the numbers mean?
+iii. Comparing the two models
+iv. Create an APA-style table of the supernova() table in your document. Discuss your findings in reference to the table, including a discussion of the F ratio, degrees of freedom, and the difference in the number of parameters between the models.
+v.  What is the proportion reduction in error (PRE), and what does it mean? What can you say about the strength of the model from PRE?
+vi. What is Cohen’s d, and what does it mean? What can you say about the strength of the model from Cohen’s d?
+vii. Conclusion
+viii. What you have learned from your models in relation to the research question? Was the research question supported?
+ix. Do you believe there are any limitations to your analysis? For example, sample size, bias, missing data, mistakes, measurement error, sampling error, unrepresentative sample, etc.?
+
+**Reference**
+
+Honghao, J., Po, Y., & Tianyu, Y.
+(2021).
+The influence of adolescents’ romantic relationship on individual development: Evidence from China. 
+*International Journal of Chinese Education*, *10*(3), 22125868211070036.
