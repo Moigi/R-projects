@@ -1,0 +1,172 @@
+---
+title: "Untitled"
+format: docx
+editor: visual
+---
+#Loading all the necessary packages
+```{r, echo=FALSE}
+library(readr)
+library(sqldf)
+library(mosaic)
+library(gtsummary)
+library(gt)
+library(corrplot)
+library(table1)
+library(tigerstats)
+library(ggplot2)
+library(tidyverse)
+library(psych)
+```
+#Loading all the datasets
+```{r, echo=FALSE}
+BenchmarkData <- read_csv("R-projects/Annual Employee Survey Analysis/BenchmarkData.csv",show_col_types = FALSE)
+TrainingData <- read_csv("R-projects/Annual Employee Survey Analysis/TrainingData.csv",show_col_types = FALSE)
+PersonalData <- read_csv("R-projects/Annual Employee Survey Analysis/PersonalData.csv",show_col_types = FALSE)
+PerformanceData <- read_csv("R-projects/Annual Employee Survey Analysis/PerformanceData.csv",show_col_types = FALSE)
+CompensationData <- read_csv("R-projects/Annual Employee Survey Analysis/CompensationData.csv",show_col_types = FALSE)
+SelectionValidationData <- read_csv("R-projects/Annual Employee Survey Analysis/SelectionValidationData.csv",show_col_types = FALSE)
+SurveyData <- read_csv("R-projects/Annual Employee Survey Analysis/SurveyData.csv",show_col_types = FALSE)
+```
+
+● Report a list of the employee IDs for those employees who responded with Strongly
+Agree (5) to the following item: “During the next 12 months, I will probably look for a
+new job outside of Recreation Unlimited.” (TI2).
+```{r,fig.align="center", echo = FALSE,fig.width = 10}
+employee_IDs <- sqldf("SELECT PersonalData.EmployeeID,SurveyData.TI2 FROM PersonalData 
+                      LEFT JOIN SurveyData ON PersonalData.EmployeeID = SurveyData.EmployeeID
+                      WHERE TI2 = 5")
+employee_IDs|>gt()|>tab_options(column_labels.background.color = "darkorange")
+```
+
+● Report information about the internal consistency reliabilities (Cronbach’s alphas) of
+each of the multi-item survey measures; explain and justify which items you selected to
+create a composite variable (i.e., overall scale score variable) for each of the multi-item
+measures. The executives would like you to report which items you removed from each
+measure (if any) prior to creating a composite variable (i.e., overall scale score
+variable). Moreover, they would like for you to justify those decisions by referencing
+Cronbach’s alphas and the actual item content (see survey items above or in link to
+online survey).
+
+#*Internal consistency reliabilities (Cronbach’s alphas) of job satisfaction items*
+```{r, echo=FALSE}
+alpha(SurveyData[,c("JS1","JS2","JS3","JS4")])
+```
+The raw alpha (raw_alpha) based on job satisfaction (JS1,JS3,JS4) items falls under the questionable category in descriptors for Cronbach’s alpha while job satisfaction (JS2) exceeds the acceptable threshold of 0.70. 
+- Therefore, We will retain all four items when computing the composite variable for job satisfaction because:
+. Cronbach’s alpha for all four items is above 0.60 ;
+. Removing an item would decrease Cronbach’s alpha; and
+. The content of all 3 items seems to fit within the conceptual definition of job satisfaction.
+#*Internal consistency reliabilities (Cronbach’s alphas) of engagement items*
+```{r, echo=FALSE}
+alpha(SurveyData[,c("Eng1","Eng2","Eng3")])
+```
+The raw alpha (raw_alpha) based on all three engagement items exceeds the acceptable threshold of 0.70. 
+- Therefore, We will retain all three items when computing the composite variable for engagement because:
+. Cronbach’s alpha for all 3 items is above 0.70 (and thus acceptable);
+. Removing an item would decrease Cronbach’s alpha; and
+. The content of all 3 items seems to fit within the conceptual definition of engagement.
+#*Internal consistency reliabilities (Cronbach’s alphas) of turnover intentions items*
+```{r, echo=FALSE}
+alpha(SurveyData[,c("TI1","TI2","TI3")])
+```
+The raw alpha (raw_alpha) based on turnover intentions (TI1,TI2) items falls under Unacceptable category in descriptors for Cronbach’s alpha while turnover intentions (TI3) exceeds the acceptable threshold of 0.70. 
+- Therefore, We will only retain TI3 item when computing the composite variable for turnover intentions because:
+. its Cronbach’s alpha is above the acceptable threshold of 0.70 ;
+. The content of TI3 item seems to fit within the conceptual definition of turnover intentions.
+
+● Create composite variables (i.e., overall scale score variables) for the three multi-item
+survey measures (see above request/bullet for information regarding how to
+explain/justify which items to retain).
+#*Internal consistency reliabilities (Cronbach’s alphas) of turnover intentions items*
+```{r, echo=FALSE}
+SurveyData$JS_Overall <- rowMeans(SurveyData[,c("JS1","JS2","JS3","JS4")], na.rm=TRUE)
+SurveyData$Eng_Overall <- rowMeans(SurveyData[,c("Eng1","Eng2","Eng3")], na.rm=TRUE)
+SurveyData$TI_Overall <- rowMeans(SurveyData[,"TI3"], na.rm=TRUE)
+```
+
+```{r, echo=FALSE}
+composite_var <- SurveyData|>select(JS_Overall,Eng_Overall,TI_Overall)
+```
+
+● Report and interpret appropriate measures of central tendency and dispersion for the
+three composite variables (based on their measurement scales) you created for the job
+satisfaction items, engagement items, and turnover intentions items.
+*Measures of central tendency and dispersion for the three composite variables*
+```{r, echo=FALSE}
+JS_Overall_desc = favstats(~JS_Overall, data = composite_var)
+Eng_Overall_desc = favstats(~Eng_Overall, data = composite_var)
+TI_Overall_desc = favstats(~TI_Overall, data = composite_var)
+Composite_Variable  = c("JS_Overall","Eng_Overall","TI_Overall")
+Summary <- rbind(JS_Overall_desc,Eng_Overall_desc,TI_Overall_desc)
+Summary <- cbind(Composite_Variable,Summary)
+Summary|>gt()|>tab_options(column_labels.background.color = "darkgreen")
+```
+
+
+
+● Compare Recreation Unlimited’s survey responses to employees’ responses from the 23
+competitor organizations. The means across the 23 competitor organizations can be
+found in the data file called BenchmarkData.csv.
+```{r, echo=FALSE}
+BenchmarkData_t <- data.frame(cbind(names(BenchmarkData),t(BenchmarkData)))
+BenchmarkData_t$X2 <- as.numeric(as.character(BenchmarkData_t$X2))
+BenchmarkData_t_Mean <- BenchmarkData_t|>rename(BenchmarkResp = X1,Mean = X2)
+survey_long <- SurveyData|>pivot_longer(cols = (2:11),names_to = 'survey_resp',values_to = 'Rating')|>
+               select(survey_resp,Rating)
+
+survey_long_mean <- survey_long|>group_by(survey_resp)|>summarise(Mean = round(mean(Rating),2))
+comparison <- sqldf("SELECT survey_long_mean.survey_resp as `Survey question`,
+                      survey_long_mean.mean as `Recreation's employees mean response`,
+                      BenchmarkData_t_Mean.Mean as `Benchmark's employees mean response`
+                      FROM survey_long_mean 
+                      INNER JOIN BenchmarkData_t_Mean 
+                      ON survey_long_mean.survey_resp = BenchmarkData_t_Mean.BenchmarkResp")
+comparison|>gt()
+```
+```{r, fig.align="center", echo = FALSE,fig.width = 14,fig.height=10}
+comparison_long <- comparison|>
+  pivot_longer(cols = (2:3),
+               names_to = 'Vars',values_to = 'Mean_rating')
+comparison_long|>
+# Stacked
+ggplot(aes(fill=Vars, y=Mean_rating, x=`Survey question`)) + 
+  geom_bar(position="stack", stat="identity")+ theme_bw()+
+  ggtitle("Recreation Unlimited’s survey responses to employees’ responses from the 23 competitor  organizations comparisoon")+
+  theme(plot.title = element_text(lineheight=3, face="bold", color="black",size=16))+
+  geom_text(aes(label = Mean_rating), size = 10, hjust = 0.5, vjust = 5, position = "stack")+
+  theme( axis.line = element_line(colour = "darkblue", size = 1, linetype = "solid"),
+         axis.text.x = element_text(face="bold", color="#993333",size=14, angle=0),
+         axis.text.y = element_text(face="bold", color="#993333",size=14, angle=0))+
+  theme(legend.position="top",legend.text=element_text(size=14),legend.title=element_text(size=14))
+  
+```
+
+
+● Report the criterion-related validities of the job satisfaction, engagement, and turnover
+intentions composite variables. The behavioral anchored rating scale (BARS) and sales
+revenue generated (Sales) variables will serve as your two criterion variables, and they
+are saved in a file called PerformancdData.csv. Specifically, please estimate, interpret,
+and report six correlations involving the following combinations of variables:
+1. Job satisfaction composite variable & BARS scores (BARS)
+2. Job satisfaction composite variable & sales revenue generated (Sales)
+3. Engagement composite variable & BARS scores (BARS)
+4. Engagement composite variable & sales revenue generated (Sales)
+5. Turnover intentions composite variable & BARS scores (BARS)
+6. Turnover intentions composite variable & sales revenue generated (Sales)
+```{r, fig.align="center", echo = FALSE,fig.width = 12}
+df <- sqldf("SELECT SurveyData.EmployeeID,SurveyData.JS_Overall,SurveyData.Eng_Overall,
+                      SurveyData.TI_Overall,BARS,Sales FROM SurveyData
+                      INNER JOIN PerformanceData 
+                      ON SurveyData.EmployeeID = PerformanceData.EmployeeID")
+#head(df)|>gt()
+M = cor(df[,-1])
+corrplot(M, method="number",type = "lower")
+```
+
+
+● Make recommendations for the organization that are informed by your findings from
+the previous bullet points.
+
+
+● Finally, for additional reporting guidance and requirements, be sure to refer to the
+grading rubric found at the end of this document.

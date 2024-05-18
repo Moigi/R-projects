@@ -1,0 +1,267 @@
+EmployeeID,UnitID,SupervisorID,JobCategoryID,JobCategory,GenderIdentity,RaceEthnicity,AgeYears,AgeCategory,Education,Veteran,Disability,TenureYears
+EE1767,UU1,EE1696,JC12,Online Sales Associate,Woman,Black or African American,35.5,Under40,SomeCollege,No,No,3.9
+EE1768,UU2,EE1696,JC12,Online Sales Associate,Woman,Black or African American,35.9,Under40,SomeCollege,No,No,3.9
+EE1769,UU1,EE1696,JC12,Online Sales Associate,Man,White,31.7,Under40,CollegeDegree,No,No,7
+EE1770,UU2,EE1696,JC12,Online Sales Associate,Man,Black or African American,35.4,Under40,CollegeDegree,No,No,6.4
+EE1771,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,38.8,Under40,SomeCollege,No,No,3.3
+EE1772,UU2,EE1701,JC12,Online Sales Associate,Woman,Hispanic or Latino,40,Over40,SomeCollege,No,No,2.2
+EE1773,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,29.3,Under40,CollegeDegree,No,No,6.5
+EE1774,UU1,EE1696,JC12,Online Sales Associate,Man,White,41.4,Over40,CollegeDegree,No,No,6.4
+EE1775,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,37.5,Under40,SomeCollege,No,No,3.7
+EE1776,UU1,EE1696,JC12,Online Sales Associate,TransMan,Hispanic or Latino,37,Under40,SomeCollege,No,No,6.4
+EE1777,UU2,EE1698,JC12,Online Sales Associate,Man,Hispanic or Latino,48.4,Over40,CollegeDegree,No,No,1.5
+EE1778,UU1,EE1698,JC12,Online Sales Associate,Woman,Asian,37.2,Under40,CollegeDegree,No,No,2.7
+EE1779,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,39.2,Under40,CollegeDegree,No,No,0.8
+EE1780,UU1,EE1698,JC12,Online Sales Associate,Woman,Asian,41.2,Over40,SomeCollege,Yes,No,3.4
+EE1781,UU2,EE1701,JC12,Online Sales Associate,Man,Asian,32,Under40,SomeCollege,No,No,6.6
+EE1782,UU1,EE1701,JC12,Online Sales Associate,Woman,Black or African American,42.2,Over40,SomeCollege,No,Yes,0.2
+EE1783,UU2,EE1698,JC12,Online Sales Associate,Woman,Black or African American,40.8,Over40,SomeCollege,No,No,3.3
+EE1784,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,40.2,Over40,SomeCollege,No,No,3.5
+EE1785,UU1,EE1698,JC12,Online Sales Associate,Woman,White,42.1,Over40,SomeCollege,No,Yes,6.2
+EE1786,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,44.7,Over40,SomeCollege,No,No,4.1
+EE1787,UU1,EE1696,JC12,Online Sales Associate,Man,White,42,Over40,CollegeDegree,No,Yes,6.3
+EE1788,UU1,EE1698,JC12,Online Sales Associate,Man,Black or African American,48.3,Over40,SomeCollege,No,Yes,4.2
+EE1789,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,45.7,Over40,CollegeDegree,No,No,3.8
+EE1790,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,40.2,Over40,SomeCollege,No,Yes,5
+EE1791,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,38.8,Under40,CollegeDegree,No,No,5
+EE1792,UU1,EE1698,JC12,Online Sales Associate,Man,Black or African American,41.7,Over40,SomeCollege,No,Yes,4.8
+EE1793,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,31.6,Under40,CollegeDegree,No,No,0.3
+EE1794,UU1,EE1696,JC12,Online Sales Associate,Man,White,47.4,Over40,SomeCollege,No,No,4
+EE1795,UU2,EE1701,JC12,Online Sales Associate,Woman,Asian,39.1,Under40,SomeCollege,No,No,6.8
+EE1796,UU1,EE1696,JC12,Online Sales Associate,TransMan,Black or African American,40.4,Over40,CollegeDegree,No,No,2.4
+EE1797,UU1,EE1696,JC12,Online Sales Associate,Woman,White,41.9,Over40,CollegeDegree,No,No,6
+EE1798,UU2,EE1696,JC12,Online Sales Associate,Woman,White,44.4,Over40,SomeCollege,No,No,1.6
+EE1799,UU1,EE1696,JC12,Online Sales Associate,Man,White,42.5,Over40,CollegeDegree,No,No,3.3
+EE1800,UU1,EE1698,JC12,Online Sales Associate,Woman,Asian,38.6,Under40,SomeCollege,No,Yes,0.1
+EE1801,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,41.1,Over40,SomeCollege,No,No,5.6
+EE1802,UU1,EE1701,JC12,Online Sales Associate,TransMan,Asian,40.3,Over40,CollegeDegree,No,Yes,4.5
+EE1803,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,42.5,Over40,CollegeDegree,No,No,1.3
+EE1804,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,33.9,Under40,SomeCollege,No,No,3.8
+EE1805,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,35.6,Under40,SomeCollege,No,No,6.7
+EE1806,UU1,EE1696,JC12,Online Sales Associate,Man,White,40.5,Over40,SomeCollege,No,No,2.5
+EE1807,UU2,EE1696,JC12,Online Sales Associate,Man,White,40.1,Over40,SomeCollege,No,Yes,1.7
+EE1808,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,36.3,Under40,CollegeDegree,Yes,Yes,0.9
+EE1809,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,42.1,Over40,SomeCollege,Yes,No,1.9
+EE1810,UU2,EE1698,JC12,Online Sales Associate,Woman,White,49.4,Over40,CollegeDegree,No,No,2.3
+EE1811,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,42,Over40,CollegeDegree,No,Yes,0.6
+EE1812,UU1,EE1696,JC12,Online Sales Associate,Man,White,38,Under40,CollegeDegree,No,No,1.5
+EE1813,UU2,EE1701,JC12,Online Sales Associate,Woman,Asian,35.5,Under40,CollegeDegree,No,No,6.2
+EE1814,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,48.4,Over40,SomeCollege,No,Yes,4.1
+EE1815,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,42,Over40,SomeCollege,No,No,6
+EE1816,UU1,EE1698,JC12,Online Sales Associate,Woman,Asian,46.1,Over40,CollegeDegree,No,No,4.8
+EE1817,UU2,EE1698,JC12,Online Sales Associate,Man,Asian,33.4,Under40,SomeCollege,No,Yes,6.9
+EE1818,UU1,EE1696,JC12,Online Sales Associate,Woman,Black or African American,45.7,Over40,SomeCollege,No,No,4.2
+EE1819,UU1,EE1696,JC12,Online Sales Associate,Woman,Black or African American,31.7,Under40,CollegeDegree,No,No,5.7
+EE1820,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,50.8,Over40,CollegeDegree,No,Yes,6.6
+EE1821,UU1,EE1698,JC12,Online Sales Associate,Man,White,37.7,Under40,CollegeDegree,No,No,2
+EE1822,UU1,EE1698,JC12,Online Sales Associate,Woman,Black or African American,48.5,Over40,CollegeDegree,No,No,1.5
+EE1823,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,27.2,Under40,CollegeDegree,No,Yes,6.2
+EE1824,UU1,EE1698,JC12,Online Sales Associate,Man,Asian,46.5,Over40,CollegeDegree,No,No,6.2
+EE1825,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,43.5,Over40,CollegeDegree,No,No,4.7
+EE1826,UU2,EE1696,JC12,Online Sales Associate,Man,White,28.4,Under40,SomeCollege,No,No,6.5
+EE1827,UU1,EE1698,JC12,Online Sales Associate,TransMan,White,47.4,Over40,SomeCollege,No,No,2.1
+EE1828,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,33.9,Under40,CollegeDegree,No,No,0.4
+EE1829,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,39.8,Under40,CollegeDegree,No,Yes,2.7
+EE1830,UU1,EE1701,JC12,Online Sales Associate,TransMan,Asian,35.7,Under40,CollegeDegree,No,Yes,2
+EE1831,UU2,EE1696,JC12,Online Sales Associate,TransMan,White,44.2,Over40,SomeCollege,No,No,1
+EE1832,UU2,EE1701,JC12,Online Sales Associate,Man,White,37.2,Under40,SomeCollege,No,No,5.7
+EE1833,UU1,EE1698,JC12,Online Sales Associate,Woman,Hispanic or Latino,38.6,Under40,CollegeDegree,No,No,6.7
+EE1834,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,39.7,Under40,SomeCollege,No,No,4.2
+EE1835,UU1,EE1701,JC12,Online Sales Associate,Woman,White,38.7,Under40,SomeCollege,No,No,3.2
+EE1836,UU1,EE1698,JC12,Online Sales Associate,TransMan,Black or African American,53.1,Over40,CollegeDegree,No,Yes,0.6
+EE1837,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,33.2,Under40,SomeCollege,No,Yes,6
+EE1838,UU1,EE1698,JC12,Online Sales Associate,Man,Asian,35.1,Under40,SomeCollege,No,Yes,4
+EE1839,UU1,EE1696,JC12,Online Sales Associate,Woman,Black or African American,42.6,Over40,CollegeDegree,Yes,No,3.8
+EE1840,UU1,EE1696,JC12,Online Sales Associate,Woman,White,45.1,Over40,CollegeDegree,No,Yes,4.6
+EE1841,UU2,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,36.5,Under40,CollegeDegree,No,No,6.7
+EE1842,UU1,EE1696,JC12,Online Sales Associate,Man,Asian,48.6,Over40,CollegeDegree,No,Yes,1.1
+EE1843,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,29.3,Under40,CollegeDegree,No,No,0.3
+EE1844,UU2,EE1696,JC12,Online Sales Associate,Woman,Black or African American,34.7,Under40,CollegeDegree,No,No,4.9
+EE1845,UU1,EE1698,JC12,Online Sales Associate,TransMan,White,31.7,Under40,CollegeDegree,No,Yes,4
+EE1846,UU1,EE1698,JC12,Online Sales Associate,Woman,White,44.3,Over40,SomeCollege,No,No,2.5
+EE1847,UU2,EE1698,JC12,Online Sales Associate,Man,Asian,49.7,Over40,CollegeDegree,No,No,2.8
+EE1848,UU1,EE1698,JC12,Online Sales Associate,Man,White,50.1,Over40,SomeCollege,No,Yes,3
+EE1849,UU2,EE1701,JC12,Online Sales Associate,Man,Asian,27.8,Under40,CollegeDegree,Yes,Yes,1
+EE1850,UU1,EE1701,JC12,Online Sales Associate,TransMan,Black or African American,50.1,Over40,CollegeDegree,No,No,6.6
+EE1851,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,36.7,Under40,SomeCollege,No,No,5.2
+EE1852,UU1,EE1696,JC12,Online Sales Associate,Woman,White,41.4,Over40,CollegeDegree,No,No,2
+EE1853,UU2,EE1696,JC12,Online Sales Associate,Woman,Asian,44.4,Over40,CollegeDegree,No,No,2.2
+EE1854,UU2,EE1701,JC12,Online Sales Associate,Man,Black or African American,45.2,Over40,SomeCollege,No,No,0.5
+EE1855,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,37.9,Under40,CollegeDegree,No,No,5
+EE1856,UU1,EE1698,JC12,Online Sales Associate,Woman,Black or African American,37.2,Under40,CollegeDegree,No,Yes,5.3
+EE1857,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,39.9,Under40,SomeCollege,No,Yes,2.3
+EE1858,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,34.6,Under40,CollegeDegree,No,No,6.6
+EE1859,UU2,EE1696,JC12,Online Sales Associate,Man,Black or African American,50.2,Over40,SomeCollege,No,No,5.8
+EE1860,UU1,EE1701,JC12,Online Sales Associate,Woman,White,54.8,Over40,SomeCollege,No,No,6.3
+EE1861,UU1,EE1696,JC12,Online Sales Associate,Woman,White,30.1,Under40,SomeCollege,No,No,3.8
+EE1862,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,40.3,Over40,SomeCollege,No,No,3
+EE1863,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,36.7,Under40,CollegeDegree,No,No,4.7
+EE1864,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,29.1,Under40,CollegeDegree,No,Yes,1.9
+EE1865,UU1,EE1696,JC12,Online Sales Associate,Man,White,66.3,Over40,CollegeDegree,No,No,4.8
+EE1866,UU1,EE1698,JC12,Online Sales Associate,Woman,White,34.8,Under40,CollegeDegree,No,Yes,6.8
+EE1867,UU1,EE1696,JC12,Online Sales Associate,Man,White,45.6,Over40,SomeCollege,No,No,0.2
+EE1868,UU1,EE1696,JC12,Online Sales Associate,TransMan,Black or African American,55.5,Over40,SomeCollege,No,No,3.5
+EE1869,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,42.6,Over40,CollegeDegree,No,No,3.3
+EE1870,UU1,EE1696,JC12,Online Sales Associate,Woman,Hispanic or Latino,44.8,Over40,CollegeDegree,No,No,2.2
+EE1871,UU1,EE1696,JC12,Online Sales Associate,Man,White,43.1,Over40,CollegeDegree,No,No,5.3
+EE1872,UU1,EE1698,JC12,Online Sales Associate,Woman,White,37.9,Under40,CollegeDegree,No,No,5.8
+EE1873,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,33.2,Under40,CollegeDegree,No,No,0.2
+EE1874,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,49.7,Over40,SomeCollege,Yes,Yes,4.8
+EE1875,UU1,EE1698,JC12,Online Sales Associate,Man,Black or African American,35.8,Under40,SomeCollege,No,No,6.1
+EE1876,UU2,EE1701,JC12,Online Sales Associate,Man,Black or African American,47,Over40,SomeCollege,No,No,0
+EE1877,UU1,EE1698,JC12,Online Sales Associate,Woman,Black or African American,21,Under40,SomeCollege,No,No,2.5
+EE1878,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,32.1,Under40,CollegeDegree,No,No,3.4
+EE1879,UU2,EE1701,JC12,Online Sales Associate,Man,Black or African American,51.8,Over40,SomeCollege,No,No,2.5
+EE1880,UU1,EE1698,JC12,Online Sales Associate,Woman,Asian,37.9,Under40,CollegeDegree,Yes,Yes,5.1
+EE1881,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,37.1,Under40,CollegeDegree,No,Yes,6.8
+EE1882,UU2,EE1698,JC12,Online Sales Associate,Woman,Black or African American,26,Under40,SomeCollege,No,Yes,4.6
+EE1883,UU2,EE1696,JC12,Online Sales Associate,Woman,Asian,36.5,Under40,CollegeDegree,No,Yes,0.4
+EE1884,UU1,EE1698,JC12,Online Sales Associate,Man,White,34.8,Under40,CollegeDegree,No,No,4.4
+EE1885,UU2,EE1696,JC12,Online Sales Associate,Woman,Asian,23.1,Under40,CollegeDegree,No,No,4.4
+EE1886,UU2,EE1701,JC12,Online Sales Associate,Woman,Asian,30.8,Under40,CollegeDegree,No,No,0.5
+EE1887,UU1,EE1701,JC12,Online Sales Associate,TransMan,Hispanic or Latino,43.5,Over40,SomeCollege,No,No,0.3
+EE1888,UU1,EE1696,JC12,Online Sales Associate,Woman,White,31.1,Under40,SomeCollege,No,No,3.4
+EE1889,UU2,EE1701,JC12,Online Sales Associate,Woman,Asian,38.9,Under40,SomeCollege,No,No,5.6
+EE1890,UU2,EE1701,JC12,Online Sales Associate,Man,Black or African American,44.2,Over40,SomeCollege,No,No,4.1
+EE1891,UU1,EE1701,JC12,Online Sales Associate,Man,Asian,51.7,Over40,CollegeDegree,No,No,4.8
+EE1892,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,46.3,Over40,CollegeDegree,No,No,1.1
+EE1893,UU2,EE1701,JC12,Online Sales Associate,Man,White,41.1,Over40,CollegeDegree,No,Yes,0.9
+EE1894,UU2,EE1696,JC12,Online Sales Associate,Man,Hispanic or Latino,51.8,Over40,SomeCollege,No,No,5.5
+EE1895,UU1,EE1696,JC12,Online Sales Associate,Woman,White,42.1,Over40,SomeCollege,No,No,4.6
+EE1896,UU1,EE1698,JC12,Online Sales Associate,Woman,Hispanic or Latino,36.8,Under40,CollegeDegree,No,No,1.4
+EE1897,UU1,EE1698,JC12,Online Sales Associate,Man,White,38.9,Under40,SomeCollege,No,No,6.5
+EE1898,UU1,EE1696,JC12,Online Sales Associate,Woman,Hispanic or Latino,49.3,Over40,CollegeDegree,No,No,6.2
+EE1899,UU2,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,43.9,Over40,CollegeDegree,No,Yes,5.3
+EE1900,UU2,EE1701,JC12,Online Sales Associate,Man,White,32.1,Under40,SomeCollege,Yes,No,6
+EE1901,UU2,EE1698,JC12,Online Sales Associate,Man,Black or African American,34.4,Under40,SomeCollege,No,No,2
+EE1902,UU1,EE1696,JC12,Online Sales Associate,Man,Asian,37.3,Under40,CollegeDegree,No,No,3.2
+EE1903,UU2,EE1701,JC12,Online Sales Associate,Man,Black or African American,43.2,Over40,CollegeDegree,No,Yes,1.4
+EE1904,UU1,EE1701,JC12,Online Sales Associate,Man,Asian,41.2,Over40,CollegeDegree,No,No,5.2
+EE1905,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,52.7,Over40,SomeCollege,No,Yes,1.3
+EE1906,UU1,EE1701,JC12,Online Sales Associate,Woman,White,44.8,Over40,SomeCollege,No,Yes,4.9
+EE1907,UU2,EE1701,JC12,Online Sales Associate,Man,White,52.9,Over40,SomeCollege,No,No,2.4
+EE1908,UU2,EE1698,JC12,Online Sales Associate,Man,Hispanic or Latino,35.8,Under40,SomeCollege,No,Yes,5.4
+EE1909,UU1,EE1698,JC12,Online Sales Associate,Man,Black or African American,47.9,Over40,CollegeDegree,No,No,6.1
+EE1910,UU2,EE1698,JC12,Online Sales Associate,Man,Asian,42.7,Over40,CollegeDegree,No,No,6.6
+EE1911,UU2,EE1698,JC12,Online Sales Associate,Woman,Black or African American,43.2,Over40,CollegeDegree,No,No,4.7
+EE1912,UU2,EE1701,JC12,Online Sales Associate,Woman,Asian,36.3,Under40,CollegeDegree,No,No,4.2
+EE1913,UU1,EE1696,JC12,Online Sales Associate,Woman,Hispanic or Latino,33.4,Under40,CollegeDegree,No,No,2.4
+EE1914,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,43.2,Over40,SomeCollege,No,Yes,4.7
+EE1915,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,22.7,Under40,CollegeDegree,No,No,4.6
+EE1916,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,36.6,Under40,SomeCollege,No,No,3.8
+EE1917,UU2,EE1701,JC12,Online Sales Associate,Woman,White,35.4,Under40,SomeCollege,No,Yes,5.3
+EE1918,UU2,EE1698,JC12,Online Sales Associate,Man,Asian,44.1,Over40,CollegeDegree,No,No,2.6
+EE1919,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,56.6,Over40,CollegeDegree,No,Yes,0.1
+EE1920,UU2,EE1701,JC12,Online Sales Associate,Man,Asian,42.1,Over40,SomeCollege,No,No,6.3
+EE1921,UU2,EE1701,JC12,Online Sales Associate,Woman,White,36.3,Under40,SomeCollege,No,No,6.1
+EE1922,UU1,EE1698,JC12,Online Sales Associate,Man,White,41.3,Over40,SomeCollege,No,No,4.9
+EE1923,UU2,EE1696,JC12,Online Sales Associate,Woman,Black or African American,37.9,Under40,CollegeDegree,No,No,6.9
+EE1924,UU1,EE1701,JC12,Online Sales Associate,Man,White,40.4,Over40,CollegeDegree,No,No,2.7
+EE1925,UU2,EE1698,JC12,Online Sales Associate,Man,Black or African American,39.2,Under40,SomeCollege,No,No,6.4
+EE1926,UU1,EE1701,JC12,Online Sales Associate,Man,White,46.4,Over40,SomeCollege,No,Yes,0.7
+EE1927,UU2,EE1701,JC12,Online Sales Associate,Man,Asian,31.3,Under40,CollegeDegree,Yes,No,3.8
+EE1928,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,50.2,Over40,SomeCollege,No,No,6.5
+EE1929,UU2,EE1696,JC12,Online Sales Associate,Man,Hispanic or Latino,35.4,Under40,SomeCollege,No,Yes,6.2
+EE1930,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,42.7,Over40,SomeCollege,Yes,No,6
+EE1931,UU1,EE1698,JC12,Online Sales Associate,Man,White,49.4,Over40,SomeCollege,No,Yes,5.2
+EE1932,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,48.6,Over40,SomeCollege,Yes,Yes,5.7
+EE1933,UU2,EE1696,JC12,Online Sales Associate,TransMan,Black or African American,40.3,Over40,CollegeDegree,Yes,No,5.8
+EE1934,UU1,EE1698,JC12,Online Sales Associate,Woman,Asian,40.6,Over40,SomeCollege,Yes,No,5.9
+EE1935,UU2,EE1698,JC12,Online Sales Associate,Woman,White,40.2,Over40,CollegeDegree,No,No,3.4
+EE1936,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,40.8,Over40,CollegeDegree,No,No,1
+EE1937,UU1,EE1698,JC12,Online Sales Associate,Man,White,35,Under40,CollegeDegree,No,Yes,2.4
+EE1938,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,29,Under40,CollegeDegree,No,Yes,0.9
+EE1939,UU1,EE1698,JC12,Online Sales Associate,TransMan,White,37.8,Under40,CollegeDegree,No,No,5.4
+EE1940,UU2,EE1701,JC12,Online Sales Associate,Man,Black or African American,50.9,Over40,CollegeDegree,No,No,6.1
+EE1941,UU1,EE1696,JC12,Online Sales Associate,Man,White,25.4,Under40,SomeCollege,No,Yes,3
+EE1942,UU1,EE1701,JC12,Online Sales Associate,TransMan,White,39.7,Under40,CollegeDegree,No,Yes,7
+EE1943,UU2,EE1701,JC12,Online Sales Associate,Man,Black or African American,50.3,Over40,SomeCollege,No,Yes,4.2
+EE1944,UU2,EE1696,JC12,Online Sales Associate,Woman,White,40.8,Over40,CollegeDegree,No,Yes,5.9
+EE1945,UU2,EE1696,JC12,Online Sales Associate,Woman,White,53.5,Over40,CollegeDegree,No,Yes,5.1
+EE1946,UU2,EE1698,JC12,Online Sales Associate,Man,White,50.3,Over40,CollegeDegree,No,Yes,3.9
+EE1947,UU1,EE1701,JC12,Online Sales Associate,Woman,White,35.6,Under40,SomeCollege,No,No,3
+EE1948,UU2,EE1701,JC12,Online Sales Associate,TransMan,White,42.2,Over40,SomeCollege,No,No,2
+EE1949,UU2,EE1698,JC12,Online Sales Associate,Woman,Black or African American,41.7,Over40,CollegeDegree,No,No,4.7
+EE1950,UU2,EE1701,JC12,Online Sales Associate,Man,Asian,38.4,Under40,SomeCollege,No,Yes,0.5
+EE1951,UU2,EE1696,JC12,Online Sales Associate,Man,White,38.5,Under40,SomeCollege,No,No,4.5
+EE1952,UU1,EE1696,JC12,Online Sales Associate,Man,White,33.1,Under40,CollegeDegree,No,No,6.2
+EE1953,UU2,EE1696,JC12,Online Sales Associate,TransMan,Hispanic or Latino,27.6,Under40,CollegeDegree,No,No,3.4
+EE1954,UU1,EE1698,JC12,Online Sales Associate,TransMan,Hispanic or Latino,44.5,Over40,CollegeDegree,No,No,2.4
+EE1955,UU1,EE1701,JC12,Online Sales Associate,Woman,White,34.5,Under40,SomeCollege,No,Yes,5.8
+EE1956,UU2,EE1696,JC12,Online Sales Associate,Man,Hispanic or Latino,52.3,Over40,CollegeDegree,No,Yes,2.7
+EE1957,UU1,EE1696,JC12,Online Sales Associate,Man,White,36.3,Under40,CollegeDegree,No,No,1.3
+EE1958,UU2,EE1696,JC12,Online Sales Associate,Man,Black or African American,35.6,Under40,SomeCollege,No,No,6
+EE1959,UU1,EE1696,JC12,Online Sales Associate,Woman,White,43,Over40,SomeCollege,No,No,6.4
+EE1960,UU2,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,35,Under40,SomeCollege,No,Yes,4.1
+EE1961,UU1,EE1696,JC12,Online Sales Associate,Man,Black or African American,29.1,Under40,CollegeDegree,No,Yes,6
+EE1962,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,30,Under40,SomeCollege,No,No,0.8
+EE1963,UU1,EE1698,JC12,Online Sales Associate,Man,Black or African American,58,Over40,CollegeDegree,No,No,4.4
+EE1964,UU1,EE1701,JC12,Online Sales Associate,Man,Black or African American,44.4,Over40,CollegeDegree,No,No,2.7
+EE1965,UU2,EE1701,JC12,Online Sales Associate,Woman,White,38.1,Under40,SomeCollege,No,No,4.9
+EE1966,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,37.8,Under40,SomeCollege,No,No,2.4
+EE1967,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,42.3,Over40,SomeCollege,No,No,2
+EE1968,UU2,EE1696,JC12,Online Sales Associate,Man,Black or African American,44.6,Over40,CollegeDegree,No,No,0.3
+EE1969,UU2,EE1701,JC12,Online Sales Associate,Woman,White,46.4,Over40,SomeCollege,No,Yes,1.1
+EE1970,UU1,EE1701,JC12,Online Sales Associate,Woman,Black or African American,29.4,Under40,SomeCollege,No,No,5
+EE1971,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,22.5,Under40,CollegeDegree,No,No,3.2
+EE1972,UU1,EE1698,JC12,Online Sales Associate,Man,Black or African American,41.3,Over40,CollegeDegree,No,No,4.4
+EE1973,UU2,EE1698,JC12,Online Sales Associate,Man,Black or African American,38.5,Under40,SomeCollege,No,No,3.4
+EE1974,UU2,EE1701,JC12,Online Sales Associate,Woman,Asian,33.5,Under40,SomeCollege,No,No,2.7
+EE1975,UU1,EE1696,JC12,Online Sales Associate,Man,White,30.6,Under40,CollegeDegree,No,No,3.9
+EE1976,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,38.7,Under40,CollegeDegree,No,No,3.1
+EE1977,UU2,EE1696,JC12,Online Sales Associate,Woman,White,44.6,Over40,SomeCollege,No,Yes,3.8
+EE1978,UU1,EE1701,JC12,Online Sales Associate,Woman,Black or African American,34,Under40,SomeCollege,Yes,No,5.7
+EE1979,UU1,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,55.1,Over40,SomeCollege,No,No,1.4
+EE1980,UU1,EE1698,JC12,Online Sales Associate,Woman,Black or African American,46.3,Over40,CollegeDegree,No,No,0.4
+EE1981,UU1,EE1698,JC12,Online Sales Associate,TransMan,Asian,27.5,Under40,CollegeDegree,No,No,1.6
+EE1982,UU2,EE1701,JC12,Online Sales Associate,Man,White,29.9,Under40,CollegeDegree,No,No,3.7
+EE1983,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,38,Under40,CollegeDegree,No,No,4.5
+EE1984,UU2,EE1696,JC12,Online Sales Associate,Man,White,40.2,Over40,SomeCollege,No,No,1.8
+EE1985,UU1,EE1696,JC12,Online Sales Associate,Man,White,39.2,Under40,CollegeDegree,No,No,6.7
+EE1986,UU1,EE1698,JC12,Online Sales Associate,Woman,Asian,37.3,Under40,SomeCollege,No,No,0.9
+EE1987,UU2,EE1701,JC12,Online Sales Associate,Woman,White,26.3,Under40,SomeCollege,No,No,3.1
+EE1988,UU2,EE1698,JC12,Online Sales Associate,Man,White,33.6,Under40,CollegeDegree,No,Yes,4
+EE1989,UU2,EE1698,JC12,Online Sales Associate,Man,White,49,Over40,SomeCollege,No,Yes,2.5
+EE1990,UU2,EE1696,JC12,Online Sales Associate,Man,White,40.7,Over40,SomeCollege,No,Yes,2.4
+EE1991,UU1,EE1701,JC12,Online Sales Associate,Woman,Asian,29.4,Under40,SomeCollege,No,No,4.8
+EE1992,UU1,EE1696,JC12,Online Sales Associate,Woman,Hispanic or Latino,38.9,Under40,SomeCollege,No,Yes,1.7
+EE1993,UU2,EE1696,JC12,Online Sales Associate,TransMan,Asian,48.6,Over40,CollegeDegree,No,No,4.8
+EE1994,UU1,EE1698,JC12,Online Sales Associate,Man,White,37.6,Under40,SomeCollege,No,No,4.3
+EE1995,UU2,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,29.7,Under40,CollegeDegree,No,No,3.4
+EE1996,UU2,EE1698,JC12,Online Sales Associate,Man,Black or African American,35.7,Under40,SomeCollege,No,No,0.3
+EE1997,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,28.7,Under40,SomeCollege,No,No,6.7
+EE1998,UU2,EE1701,JC12,Online Sales Associate,Man,Asian,40.1,Over40,CollegeDegree,No,Yes,3.7
+EE1999,UU2,EE1701,JC12,Online Sales Associate,Man,White,59.3,Over40,SomeCollege,No,No,5.8
+EE2000,UU1,EE1696,JC12,Online Sales Associate,Man,White,50.9,Over40,SomeCollege,No,Yes,6.6
+EE2001,UU1,EE1698,JC12,Online Sales Associate,Man,White,23.1,Under40,SomeCollege,No,No,0.7
+EE2002,UU2,EE1701,JC12,Online Sales Associate,Woman,Black or African American,49.2,Over40,CollegeDegree,No,No,2.6
+EE2003,UU1,EE1696,JC12,Online Sales Associate,Woman,White,32.6,Under40,SomeCollege,Yes,Yes,0.9
+EE2004,UU2,EE1696,JC12,Online Sales Associate,TransMan,Asian,27.8,Under40,SomeCollege,No,No,3.8
+EE2005,UU1,EE1698,JC12,Online Sales Associate,Man,Hispanic or Latino,45.3,Over40,SomeCollege,No,Yes,0.5
+EE2006,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,41.6,Over40,CollegeDegree,No,No,3.2
+EE2007,UU2,EE1698,JC12,Online Sales Associate,Woman,Asian,43.2,Over40,SomeCollege,No,Yes,2.9
+EE2008,UU1,EE1698,JC12,Online Sales Associate,Man,Black or African American,35.2,Under40,CollegeDegree,No,No,2.2
+EE2009,UU1,EE1696,JC12,Online Sales Associate,Man,Hispanic or Latino,26.3,Under40,CollegeDegree,No,No,5.2
+EE2010,UU1,EE1696,JC12,Online Sales Associate,Woman,White,37.3,Under40,SomeCollege,No,Yes,0.9
+EE2011,UU1,EE1698,JC12,Online Sales Associate,Man,Asian,35.5,Under40,SomeCollege,No,No,5.6
+EE2012,UU1,EE1698,JC12,Online Sales Associate,Man,White,36.7,Under40,CollegeDegree,No,Yes,3.6
+EE2013,UU1,EE1701,JC12,Online Sales Associate,Man,White,46.1,Over40,SomeCollege,No,Yes,4.8
+EE2014,UU1,EE1696,JC12,Online Sales Associate,Man,White,41.8,Over40,CollegeDegree,No,No,1
+EE2015,UU2,EE1701,JC12,Online Sales Associate,TransMan,Hispanic or Latino,41.5,Over40,CollegeDegree,No,Yes,0.8
+EE2016,UU2,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,38.5,Under40,SomeCollege,No,No,5
+EE2017,UU2,EE1696,JC12,Online Sales Associate,Man,Black or African American,41.1,Over40,SomeCollege,No,Yes,6.4
+EE2018,UU2,EE1698,JC12,Online Sales Associate,Man,Asian,34.7,Under40,SomeCollege,No,No,3.2
+EE2019,UU2,EE1696,JC12,Online Sales Associate,Man,White,50.5,Over40,SomeCollege,No,No,0.1
+EE2020,UU1,EE1696,JC12,Online Sales Associate,Man,Asian,46.5,Over40,SomeCollege,Yes,No,3
+EE2021,UU2,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,35.4,Under40,SomeCollege,Yes,No,3.9
+EE2022,UU2,EE1696,JC12,Online Sales Associate,Man,Asian,40.1,Over40,CollegeDegree,No,No,2.6
+EE2023,UU1,EE1696,JC12,Online Sales Associate,Woman,Asian,42.3,Over40,CollegeDegree,No,No,6.7
+EE2024,UU2,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,36.7,Under40,CollegeDegree,No,Yes,6.6
+EE2025,UU1,EE1701,JC12,Online Sales Associate,Man,Hispanic or Latino,51.2,Over40,CollegeDegree,No,Yes,4.3
+EE2026,UU1,EE1696,JC12,Online Sales Associate,TransMan,Hispanic or Latino,38.1,Under40,SomeCollege,Yes,No,1.1
+EE2027,UU2,EE1698,JC12,Online Sales Associate,Woman,White,40.6,Over40,CollegeDegree,No,Yes,0.7
+EE2028,UU1,EE1701,JC12,Online Sales Associate,Man,Asian,42.7,Over40,SomeCollege,No,Yes,3.3
+EE2029,UU2,EE1696,JC12,Online Sales Associate,Woman,White,39.3,Under40,SomeCollege,No,No,6.4
+EE2030,UU2,EE1698,JC12,Online Sales Associate,Woman,White,42.2,Over40,SomeCollege,No,No,0.6
+EE2031,UU1,EE1696,JC12,Online Sales Associate,TransMan,White,32.4,Under40,CollegeDegree,No,Yes,5.1
+EE2032,UU2,EE1698,JC12,Online Sales Associate,Woman,Hispanic or Latino,25.6,Under40,CollegeDegree,No,Yes,6.1

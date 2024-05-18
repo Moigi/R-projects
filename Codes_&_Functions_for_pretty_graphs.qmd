@@ -1,0 +1,19 @@
+---
+title: "Codes for Different graphs"
+format: html
+editor: visual
+---
+
+```{r}
+ashes_df %>%
+  count(team, role) %>%       
+  group_by(team) %>%
+  mutate(pct= prop.table(n) * 100) %>%
+  ggplot() + aes(team, pct, fill=role) +
+  geom_bar(stat="identity") +
+  ylab("Number of Participants") +
+  geom_text(aes(label=paste0(sprintf("%1.1f", pct),"%")),
+            position=position_stack(vjust=0.5)) +
+  ggtitle("England & Australia Team Make Up") +
+  theme_bw()
+```
