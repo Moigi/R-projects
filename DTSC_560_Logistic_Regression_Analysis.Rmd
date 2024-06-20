@@ -1,0 +1,426 @@
+---
+title: "DTSC 560 - Logistic Regression Analysis "
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  word_document: default
+  pdf_document: default
+---
+
+## Importing all the necessary packages
+```{r,echo=FALSE}
+library(readr)
+library(tidyverse)
+library(gt)
+library(gtsummary)
+library(splitTools)
+library(caret)
+library(pROC)
+library(ROSE)
+```
+
+## Loading the data
+```{r,echo=FALSE}
+insurance <- read_csv("insurance.csv",show_col_types = FALSE)
+insurance_predictions <- read_csv("insurance_predictions.csv",show_col_types = FALSE)
+#View(insurance)
+```
+
+**1) Generate summary statistics for the variables in the insurance.csv dataset.**
+Quiz question #1: What percentage of customers have submitted a recent claim? 
+```{r,echo=FALSE}
+insurance|>
+     tbl_summary(by = CLAIM,digits = list(all_categorical() ~ c(0, 1)),
+                 type = all_continuous() ~ "continuous2",
+    statistic = all_continuous() ~ c("{mean} ({sd}) {median} ({p25}, {p75})", "{min}, {max}"))|>
+     add_overall()|>
+     modify_header(label ~ " ",
+     all_stat_cols() ~ "**{level}**, N={n} ({style_percent(p)}%)")|>
+     bold_labels() |>
+     as_gt() |>
+     tab_options(
+         column_labels.background.color = "darkblue",
+         row_group.font.weight = "bold")|>
+     #gt::tab_style(           
+     #  style = list(gt::cell_fill(color = "lightgreen")),
+     #  locations = gt::cells_body(columns = vars(stat_0)))|>
+     gt::tab_header("Table 1: summary statistics for the variables in the insurance")|> 
+     gt::tab_spanner(
+         label = "Total",  
+         columns = starts_with(c("stat_0")))|> 
+     gt::tab_options(
+         table.font.size = "small",
+         data_row.padding = gt::px(2),
+         heading.align = 'left',
+         heading.background.color = 'darkgreen',
+         heading.title.font.size = px(20))# |>
+     #gt::gtsave( filename = "Summary_Statistics_Insurance.png")
+```
+
+The percentage of customers have submitted a recent claim is $26\%$
+
+**2) Partition the dataset into a training, validation, and test set, using a 60%-20%-20% split.**
+Quiz question #2: How many observations are in the test set? 
+```{r,echo=FALSE}
+set.seed(42)
+# Split data into partitions
+inds <- partition(insurance$CLAIM, p = c(train = 0.6, valid = 0.2, test = 0.2))
+
+train <- insurance[inds$train, ]
+valid <- insurance[inds$valid, ]
+test <- insurance[inds$test, ]
+glimpse(test)
+```
+
+**3) We don’t have a severe class imbalance in the insurance dataset, so we’re going to start with fitting a model to the training set. Conduct a logistic regression analysis using the training data frame with CLAIM as the outcome variable and all the other variables in the dataset as predictor variables.**
+```{r,echo=FALSE}
+logmodel = glm(CLAIM~.,family='binomial',data = train)
+summary(logmodel)
+
+cat("The odd ratio:\n")
+
+exp(cbind(odds_ratios = coef(logmodel)))
+#odds_ratios
+```
+
+Quiz question #3: What is the coefficient for the KIDSDRIV variable? 
+
+The coefficient for the KIDSDRIV variable is $1.9993$
+
+Quiz question #4: What is the odds ratio for the URBANICITY variable?
+
+The odds ratio for the URBANICITY variable is approximately 9.5509
+
+Quiz question #5: How would you interpret the odds ratio for the URBANICITY variable? (MC)
+
+The URBANICITY variable odds ratio means that a customer who lives in an urban has made a recent auto insurance claim 9.5509 times more than customers living in rural area.
+
+**4) Using the model you fitted in Step (3) and the validation data frame you created in Step (2), create a confusion matrix to assess the accuracy of the logistic regression model.** 
+```{r,echo=FALSE}
+# Make predictions on the test dataset
+predicted_probs <- predict(logmodel, valid, type = "response")
+predicted_classes <- ifelse(predicted_probs > 0.5, 1, 0)
+# Create the confusion matrix
+cm <- confusionMatrix(table(predicted_classes, valid$CLAIM))
+print(cm)
+```
+
+Quiz question #6: How many insurance claims (positives) did the model predict correctly?
+
+The model predicted correctly 984 insurance claims.
+
+Quiz question #7: What is the accuracy rate? 
+The accuracy rate is 0.7676
+
+Quiz question #8: What is the sensitivity? 
+The sensitivity is 0.9239
+
+Quiz question #9: How would you interpret the sensitivity? (MC)
+Sensitivity obtained in the above question tells us that has $92.29\%$ ability to designate an individual with a recent auto insurance claim  as positive.
+
+**5) Again using the model you fitted in Step (3) and the validation data frame, create an ROC curve plot and calculate the AUC.**
+```{r,echo=FALSE}
+# Create the ROC curve
+roc_obj <- roc(predicted_classes, valid$CLAIM)
+# Plot the ROC curve
+plot(roc_obj, main = "ROC Curve for the Logistic Regression Model")
+abline(0, 1, lty = 2, col = "green")  # Add a reference line for a random classifier
+# Calculate the AUC
+auc_value <- auc(roc_obj)
+cat("AUC:", auc_value, "\n")
+```
+
+Quiz question #10: What is the AUC? 
+
+AUC = 0.7014423
+
+**6) Even though we do not have a severe class imbalance in our data, let’s try addressing our moderate class imbalance to see if it improves our model accuracy. Using the training set you generated in Step (2), create a new training subset using the oversampling method.**
+```{r,echo=FALSE}
+data_balanced_over <- ovun.sample(CLAIM~., data = train, method = "over",N = 6388)$data
+table(data_balanced_over$CLAIM)
+```
+
+Quiz question #11: In this new training subset generated from oversampling, how many observations are in the class that has made a recent auto claim (“Yes”)? 
+
+3194 observations are in the class that has made a recent auto claim (“Yes”)
+
+**7) Conduct a logistic regression analysis using the new oversampled training subset with CLAIM as the outcome variable and all the other variables in the dataset as predictor variables.** 
+```{r,echo=FALSE}
+logmodel1 = glm(CLAIM~.,family='binomial',data = data_balanced_over)
+summary(logmodel1)
+```
+
+**8) Using the model you fitted in Step (7) and the validation data frame you created in Step (2), create a confusion matrix to assess the accuracy of the logistic regression model.**
+```{r,echo=FALSE}
+# Make predictions on the test dataset
+predicted_probs1 <- predict(logmodel1, valid, type = "response")
+predicted_classes1 <- ifelse(predicted_probs1 > 0.5, 1, 0)
+# Create the confusion matrix
+cm1 <- confusionMatrix(table(predicted_classes1, valid$CLAIM))
+print(cm1)
+```
+
+
+Quiz question #12: What is the accuracy rate? 
+
+Accuracy = 0.7158
+
+Quiz question #13: What is the sensitivity? 
+
+Sensitivity = 0.7202
+
+**9) Again using the model you fitted in Step (7) and the validation data frame, create an ROC curve plot and calculate the AUC.** 
+```{r,echo=FALSE}
+# Create the ROC curve
+roc_obj1 <- roc(predicted_classes1, valid$CLAIM)
+# Plot the ROC curve
+plot(roc_obj1, main = "ROC Curve for the Logistic Regression Model")
+abline(0, 1, lty = 2, col = "darkgreen")  # Add a reference line for a random classifier
+# Calculate the AUC
+auc_value1 <- auc(roc_obj1)
+cat("AUC:", auc_value1, "\n")
+```
+
+
+Quiz question #14: What is the AUC? 
+
+AUC = 0.6725446
+
+Quiz question #15: What do you notice about this AUC value as compared to the AUC value for the previous model? (MC) 
+
+AUC value in the second model is smaller the AUC value for the first model (0.6725 < 0.7014).
+
+**10) Let’s say that for this insurance company, sensitivity is more important than overall accuracy and the cost of false positives is lower than the cost of false negatives, so we will use the logistic regression model fitted to the over sampled training subset.**
+Using the model generated in Step (7) and the test set you created in Step (2), create a confusion matrix to assess the accuracy of the logistic regression model on the test data frame.
+```{r,echo=FALSE}
+# Make predictions on the test dataset
+predicted_probs2 <- predict(logmodel1, test, type = "response")
+predicted_classes2 <- ifelse(predicted_probs2 > 0.5, 1, 0)
+# Create the confusion matrix
+cm2 <- confusionMatrix(table(predicted_classes2, test$CLAIM))
+print(cm2)
+```
+
+
+Quiz question #16: How many insurance claims (positives) did the model predict correctly using the test set? 
+
+The model predicted correctly 749 insurance claims (positives) using the test set.
+
+
+Quiz question #17: What is the accuracy rate? 
+
+Accuracy = 0.7132
+
+Quiz question #18: What is the sensitivity? 
+
+Sensitivity = 0.7033
+
+**11) Again using the model you fitted in Step (7) and the test data frame, create an ROC curve plot and calculate the AUC.**
+```{r,echo=FALSE}
+# Create the ROC curve
+roc_obj2 <- roc(predicted_classes2, test$CLAIM)
+# Plot the ROC curve
+plot(roc_obj2, main = "ROC Curve for the Logistic Regression Model")
+abline(0, 1, lty = 2, col = "darkgreen")  # Add a reference line for a random classifier
+# Calculate the AUC
+auc_value2 <- auc(roc_obj2)
+cat("AUC:", auc_value2, "\n")
+```
+
+
+Quiz question #19: What is the AUC? 
+
+AUC = 0.6779
+
+**12) Now we’ll use the model fitted to the oversampled training subset to make predictions about whether new customers will make auto insurance claims. Using the data contained in the csv file “insurance_predictions.csv”, predict the probability scores for insurance claims for ten new customers.** 
+```{r,echo=FALSE}
+# Make predictions on the test dataset
+predicted_probs3 <- predict(logmodel1, insurance_predictions, type = "response")
+ 
+```
+
+
+Quiz question #20: What is the predicted probability of making an insurance claim for new customer #1?
+```{r,echo=FALSE}
+cbind('predicted probability' = predicted_probs3)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
